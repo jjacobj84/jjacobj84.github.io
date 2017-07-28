@@ -1,1 +1,111 @@
-Hello world
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CS498 - Final Project</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.css" rel="stylesheet">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+        </script>
+        <!-- D3 package -->    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <!-- Vega lite-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.38/vega.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.6/vega-lite.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.19/vega-embed.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.14/vega-embed.min.js"></script>
+        
+        <!-- lib-->
+        <script src="js/barChart.js"></script>
+        
+        <style>
+            body {
+                position: relative; 
+            }
+            #section1 {padding-top:50px;height:600px;color: #fff; background-color: rgb(240, 220, 160);}
+            #section2 {padding-top:50px;height:600px;color: #fff; background-color: transparent;}
+            #section3 {padding-top:50px;height:600px;color: #fff; background-color: #ff9800;}
+            #section41 {padding-top:50px;height:600px;color: #fff; background-color: #00bcd4;}
+            #section42 {padding-top:50px;height:600px;color: #fff; background-color: #009688;}
+        </style>
+    </head>
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>                        
+              </button>
+              <a class="navbar-brand" href="#">CS498 - Final Project</a>
+            </div>
+            <div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                  <li><a href="#section1">About</a></li>
+                  <li><a href="#section2">Diffusion</a></li>
+                  <li><a href="#section3">Forms of trafficking</a></li>
+                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Section 4 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#section41">Section 4-1</a></li>
+                      <li><a href="#section42">Section 4-2</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>    
+        <div id="section1" class="container-fluid">
+                <!-- Full Width Image Header -->
+
+          <h1>About</h1>
+                    <!-- First Featurette -->
+                <div class="featurette" id="about">
+                    <h2 class="featurette-heading">Trafficking in persons
+                    </h2>
+                    <p class="lead">Trafficking in persons, is a crime that includes three elements: 1) the ACT of recruiting, transporting, trans- ferring, harbouring or receiving a person; 2) by MEANS of e.g. coercion, deception or abuse of vulnerability; 3) for the PURPOSE OF EXPLOITATION</p>
+                </div>
+        </div>
+            <div id="section2" class="container-fluid">
+                <h2 class="featurette-heading" >
+                        <span class="text-muted">The World is vulnerable!</span>
+                </h2>
+                <div class="row align-items-start"> 
+                    <div class="col-sm-6 featurette" id="diffusionNote">
+                        <p class="lead text-muted">Victims are trafficked along a 
+                            multitude of trafficking flows; within countries, between neighbouring countries or even across different continents. More than 500 differ-ent trafficking flows were detected between 2012 and 2014.</p>            
+                            
+                    </div>       
+                    <div class="col-sm-6" id="worldSummarybarChar">
+                        <script>
+                            drawWorldDataChart();
+                        </script>
+                    </div> 
+                </div> 
+            </div>
+        <div class="featurette" id="section3">
+            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500">
+
+            <h2 class="featurette-heading">
+                <span class="text-muted">EXPLOITATIVE PURPOSES</span>
+            </h2>
+            <p class="lead">Trafficking for sexual exploitation and for forced labour are the most prominently detected forms, but trafficking victims can also be exploited in many other ways. Victims are trafficked to be used as beggars, for forced or sham marriages, benefit fraud, production of pornography or for organ removal, to mention some of the forms coun- tries have reported.</p>
+        </div>
+        <div id="section41" class="container-fluid">
+          <h1>Section 4 Submenu 1</h1>
+          <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+          <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+        </div>
+        <div id="section42" class="container-fluid">
+          <h1>Section 4 Submenu 2</h1>
+          <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+          <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+        </div>
+    </body>
+</html>
