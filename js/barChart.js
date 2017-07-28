@@ -7,8 +7,8 @@ function drawWorldDataChart(){
         "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
         "data": {"url": "data/SummaryData.csv"},
         "mark": "bar",
-        "width" : "300",
-        "height" : "300",
+        "width" : "400",
+        "height" : "400",
         "encoding": {
             "x": {"aggregate": "sum", "field": "Victims Count", "type": "quantitative"},
             "y": {"field": "Region", "type": "nominal"},

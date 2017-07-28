@@ -10,6 +10,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
         </script>
+        <script src="//d3js.org/topojson.v1.min.js"></script>
         <!-- D3 package -->    
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
         <!-- Vega lite-->
@@ -26,11 +27,18 @@
             body {
                 position: relative; 
             }
-            #section1 {padding-top:50px;height:600px;color: #fff; background-color: rgb(240, 220, 160);}
+            .jumbotron {
+                background-color:sienna; 
+            }
+            .vertical-center {
+                align-items: center;
+                text-align: center;
+            }
+            #section1 {padding-top:50px;height:600px;color: #fff; background-color: sienna;}
             #section2 {padding-top:50px;height:600px;color: #fff; background-color: transparent;}
-            #section3 {padding-top:50px;height:600px;color: #fff; background-color: #ff9800;}
-            #section41 {padding-top:50px;height:600px;color: #fff; background-color: #00bcd4;}
-            #section42 {padding-top:50px;height:600px;color: #fff; background-color: #009688;}
+            #section3 {padding-top:50px;height:600px;color: #fff; background-color: transparent;}
+            #section4 {padding-top:50px;height:600px;color: #fff; background-color: rgb(240, 220, 160);}
+            #section5 {padding-top:50px;height:1000px;color: #fff; background-color: transparent;}
         </style>
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -48,38 +56,30 @@
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                   <li><a href="#section1">About</a></li>
-                  <li><a href="#section2">Diffusion</a></li>
-                  <li><a href="#section3">Forms of trafficking</a></li>
-                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Section 4 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#section41">Section 4-1</a></li>
-                      <li><a href="#section42">Section 4-2</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="#section2">Definition</a></li>
+                  <li><a href="#section3">Diffusion</a></li>
+                  <li><a href="#section4">Forms of trafficking</a></li>
+                  <li><a href="#section5">World View</a></li>
                 </ul>
               </div>
             </div>
           </div>
         </nav>    
         <div id="section1" class="container-fluid">
-                <!-- Full Width Image Header -->
-
-          <h1>About</h1>
-                    <!-- First Featurette -->
-                <div class="featurette" id="about">
-                    <h2 class="featurette-heading">Trafficking in persons
-                    </h2>
-                    <p class="lead">Trafficking in persons, is a crime that includes three elements: 1) the ACT of recruiting, transporting, trans- ferring, harbouring or receiving a person; 2) by MEANS of e.g. coercion, deception or abuse of vulnerability; 3) for the PURPOSE OF EXPLOITATION</p>
-                </div>
+            <div class="jumbotron vertical-center" background="transparent">
+                <h1>Human trafficking</h1>
+                <p>Through the Lens of Data</p>
+            </div>
         </div>
-            <div id="section2" class="container-fluid">
+        <div id="section3" class="container-fluid">
                 <h2 class="featurette-heading" >
-                        <span class="text-muted">The World is vulnerable!</span>
+                        <span class="text-muted">No country is immune</span>
                 </h2>
                 <div class="row align-items-start"> 
                     <div class="col-sm-6 featurette" id="diffusionNote">
-                        <p class="lead text-muted">Victims are trafficked along a 
-                            multitude of trafficking flows; within countries, between neighbouring countries or even across different continents. More than 500 differ-ent trafficking flows were detected between 2012 and 2014.</p>            
+                        <p class="lead text-muted">Virtually every country in the world is affected 
+                            by these crimes. Victims are trafficked along a 
+                            multitude of trafficking flows; within countries, between neighbouring countries or even across different continents. An interactive chart visualizes data collection from 136 countries which were categorized into eight different regions:.</p>            
                             
                     </div>       
                     <div class="col-sm-6" id="worldSummarybarChar">
@@ -88,24 +88,25 @@
                         </script>
                     </div> 
                 </div> 
-            </div>
-        <div class="featurette" id="section3">
-            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500">
+        </div>
+        <div class="featurette" id="section4">
+            <img class="featurette-image img-circle img-responsive pull-right" src="data/formsOfTrafficking.jpg">
 
             <h2 class="featurette-heading">
                 <span class="text-muted">EXPLOITATIVE PURPOSES</span>
             </h2>
             <p class="lead">Trafficking for sexual exploitation and for forced labour are the most prominently detected forms, but trafficking victims can also be exploited in many other ways. Victims are trafficked to be used as beggars, for forced or sham marriages, benefit fraud, production of pornography or for organ removal, to mention some of the forms coun- tries have reported.</p>
         </div>
-        <div id="section41" class="container-fluid">
-          <h1>Section 4 Submenu 1</h1>
-          <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-          <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+        <div id="section5" class="container-fluid">
+            <div id="map"></div>
         </div>
-        <div id="section42" class="container-fluid">
-          <h1>Section 4 Submenu 2</h1>
-          <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-          <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
-        </div>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() { // this runs as soon as the page is ready (DOM is loaded)
+                console.log("inside");
+            $("#section5").load("lib/map.html")});
+                            console.log("done");
+
+        </script>
     </body>
 </html>
