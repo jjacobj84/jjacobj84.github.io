@@ -6,13 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.css" rel="stylesheet">
-        
+        <link rel="stylesheet1" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
         </script>
         <script src="//d3js.org/topojson.v1.min.js"></script>
-        <!-- D3 package -->    
+        <!-- D3 package     -->
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script src="https://d3js.org/d3-color.v1.min.js"></script>
+        <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
         <!-- Vega lite-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.38/vega.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.6/vega-lite.js"></script>
@@ -21,8 +27,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.14/vega-embed.min.js"></script>
         
         <!-- lib-->
-        <script src="js/barChart.js"></script>
-        
+        <script src="js/barChart.js"></script>        
         <style>
             body {
                 position: relative; 
@@ -35,10 +40,10 @@
                 text-align: center;
             }
             #section1 {padding-top:50px;height:600px;color: #fff; background-color: sienna;}
-            #section2 {padding-top:50px;height:600px;color: #fff; background-color: transparent;}
-            #section3 {padding-top:50px;height:600px;color: #fff; background-color: transparent;}
-            #section4 {padding-top:50px;height:600px;color: #fff; background-color: rgb(240, 220, 160);}
-            #section5 {padding-top:50px;height:1000px;color: #fff; background-color: transparent;}
+            #section2 {padding-top:50px;padding-left:20px;height:600px;color: #fff; background-color: transparent;}
+            #section3 {padding-top:50px;height:600px;color: #fff; background-color: rgb(240, 220, 160);}
+            #section4 {padding-top:50px;padding-left:20px;height:600px;color: #fff; background-color: transparent;}
+            #section5 {padding-top:50px;height:1000px;color: #fff; background-color: rgb(240, 220, 160);}
         </style>
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -56,9 +61,9 @@
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                   <li><a href="#section1">About</a></li>
-                  <li><a href="#section2">Definition</a></li>
+                  <li><a href="#section2">Overview</a></li>
                   <li><a href="#section3">Diffusion</a></li>
-                  <li><a href="#section4">Forms of trafficking</a></li>
+                  <li><a href="#section4">Reasons</a></li>
                   <li><a href="#section5">World View</a></li>
                 </ul>
               </div>
@@ -71,6 +76,20 @@
                 <p>Through the Lens of Data</p>
             </div>
         </div>
+        <div class="featurette" id="section2">
+            <img class="featurette-image img-circle img-responsive pull-right" src="data/cover.jpg">
+            <h2 class="featurette-heading">
+                <span class="text-muted">What is Human trafficking?</span>
+            </h2>
+            <p class="lead text-muted">Human trafficking is the acquisition of people by improper means such as force, fraud or deception, with the aim of exploiting them. Trafficking in persons is a serious crime and a grave violation of human rights. According to data published by UNODC (United Nations Office On Drugs and Crime) year 2016, thousands of men, women and children fall into the hands of traffickers, in their own countries and abroad.This visulaziation is based on data obtained from UNODC</p>
+            <!--
+            <div class="text-left">
+                <a href="http://www.unodc.org/unodc/data-and-analysis/glotip.html" target="_blank">
+                  <p class="lead">For latest report click here</p>
+                </a>
+            </div>-->
+        </div>
+
         <div id="section3" class="container-fluid">
                 <h2 class="featurette-heading" >
                         <span class="text-muted">No country is immune</span>
@@ -80,33 +99,40 @@
                         <p class="lead text-muted">Virtually every country in the world is affected 
                             by these crimes. Victims are trafficked along a 
                             multitude of trafficking flows; within countries, between neighbouring countries or even across different continents. An interactive chart visualizes data collection from 136 countries which were categorized into eight different regions:.</p>            
-                            
                     </div>       
                     <div class="col-sm-6" id="worldSummarybarChar">
                         <script>
-                            drawWorldDataChart();
+                           drawWorldDataChart();
                         </script>
                     </div> 
                 </div> 
         </div>
-        <div class="featurette" id="section4">
-            <img class="featurette-image img-circle img-responsive pull-right" src="data/formsOfTrafficking.jpg">
+        <div class="cointainer-fluid" id="section4">
+            <div class="row align-items-center"> 
+                <div class="col-sm-6" id="notes">
+                    <h2 class="featurette-heading">
+                        <span class="text-muted">Reasons for trafficking</span>
+                    </h2>
+                    <p class="lead text-muted">Based on data reported from 136 countries, trafficking for sexual exploitation and for forced labour are the most prominently detected forms, but trafficking victims can also be exploited in many other ways. Victims are trafficked to be used as beggars, benefit fraud,or for organ removal. An interactive doughnut chart with filters (check/uncheck legends for filtering) and tooltips is used to better visualize this data</p>
 
-            <h2 class="featurette-heading">
-                <span class="text-muted">EXPLOITATIVE PURPOSES</span>
-            </h2>
-            <p class="lead">Trafficking for sexual exploitation and for forced labour are the most prominently detected forms, but trafficking victims can also be exploited in many other ways. Victims are trafficked to be used as beggars, for forced or sham marriages, benefit fraud, production of pornography or for organ removal, to mention some of the forms coun- tries have reported.</p>
+                </div>
+
+                <div class="col-sm-6" id="pieChart">
+                </div>
+            </div>
         </div>
         <div id="section5" class="container-fluid">
-            <div id="map"></div>
+            <div class="row align-items-start"> 
+                <div class="col-sm-8" id="map"></div>
+                <div class="col-sm-4 featurette" id="diffusionNote">
+                </div>
+            </div>
         </div>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
         <script type="text/javascript">
             $(document).ready(function() { // this runs as soon as the page is ready (DOM is loaded)
-                console.log("inside");
-            $("#section5").load("lib/map.html")});
-                            console.log("done");
-
+            $("#pieChart").load("lib/pieChartWithToolTip.html");
+            $("#map").load("lib/map.html")});
         </script>
     </body>
 </html>

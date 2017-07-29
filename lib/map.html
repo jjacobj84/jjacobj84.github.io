@@ -5,8 +5,8 @@
     <script src="//code.jquery.com/jquery-2.0.0.js"></script>
     <style>
     #map {
-      background-color: #fff;
-      border: 1px solid #ccc;
+      background-color: rgb(240, 220, 160);
+      border: 0px solid #ccc;
     }
     .background {
       fill: none;
@@ -41,13 +41,13 @@
     <script src="//d3js.org/topojson.v1.min.js"></script>
     <script>
     var m_width = $("#map").width(),
-        width = 938,
+        width = 538,
         height = 500,
         country,
         state;
 
     var projection = d3.geo.mercator()
-        .scale(150)
+        .scale(100)
         .translate([width / 2, height / 1.5]);
 
     var path = d3.geo.path()
@@ -66,8 +66,8 @@
         .on("click", country_clicked);
 
     var g = svg.append("g");
-    console.log("Came here");
-    d3.json("../data/countries.topo.json", function(error, us) {
+    d3.json("data/countries.topo.json", function(error, us) {
+        //console.log(topojson.feature(us, us.objects.countries).features);
       g.append("g")
         .attr("id", "countries")
         .selectAll("path")
