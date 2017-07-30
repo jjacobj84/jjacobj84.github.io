@@ -10,7 +10,7 @@ function drawWorldDataChart(){
         "width" : "400",
         "height" : "400",
         "encoding": {
-            "x": {"aggregate": "sum", "field": "Victims Count", "type": "quantitative"},
+            "x": {"aggregate": "sum", "field": "VictimsCount", "type": "quantitative"},
             "y": {"field": "Region", "type": "nominal"},
             "color": {"field": "Victims", "type": "nominal"},
         }
@@ -26,7 +26,7 @@ function drawWorldDataChart(){
             formatType : "string"
         },
         {
-            field: "Victims Count",
+            field: "VictimsCount",
             title: "Count",
             formatType : "number"
         }

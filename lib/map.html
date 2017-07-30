@@ -5,21 +5,21 @@
     <script src="//code.jquery.com/jquery-2.0.0.js"></script>
     <style>
     #map {
-      background-color: rgb(240, 220, 160);
+      background-color: none;
       border: 0px solid #ccc;
     }
     .background {
-      fill: none;
+      fill: #7284b7;
       pointer-events: all;
     }
     #countries, #states {
       fill: #89a;
-      stroke: #fff;
+      stroke: #345;
       stroke-linejoin: round;
       stroke-linecap: round;
     }
     #countries .active, #states .active {
-      fill: #89a;
+      fill: #fff;
     }
     #cities {
       stroke-width: 0;
@@ -33,41 +33,128 @@
       margin-bottom: 0;
       padding: 9.5px;
     }
+    .hidden {
+        display: none;
+    }
+    div.tooltip {
+        color: #222;
+        background-color: #fff;
+        padding: .5em;
+        text-shadow: #f5f5f5 0 1px 0;
+        border-radius: 2px;
+        opacity: 0.9;
+        position: absolute;
+    }
     </style>
   </head>
   <body>
-    <div id="map"></div>
     <script src="//d3js.org/d3.v3.min.js"></script>
     <script src="//d3js.org/topojson.v1.min.js"></script>
     <script>
-    var m_width = $("#map").width(),
+    var myDataJson = {};
+    var traffickingJson = {};
+    var dataCsv = d3.csv("data/SummaryPerCountryData.csv", 
+        function(error, rows) {
+            rows.forEach(function(d) {
+                var item = new Object();
+                var temp = [];
+                item.label = "Men";
+                if(d.Adult_men == 0){
+                    item.count = d.Adults;
+                } else {
+                    item.count = d.Adult_men;
+                }
+                temp[0] = item;
+                item = new Object();
+                 item.label = "Women";
+                item.count = d.Adult_women;
+                temp[1] = item;
+                item = new Object();
+                item.label = "Boys";
+                if(d.Children_Boys == 0) {
+                    item.count = d.Children;
+                } else {
+                    item.count = d.Children_Boys;
+                }
+                temp[2] = item;
+                item = new Object();
+                item.label = "Girls";
+                item.count = d.Children_Girls;
+                temp[3] = item;
+                var containerObject = new Object();
+                containerObject.sum = d.Total;
+                containerObject.elements = temp;
+                myDataJson[d.Country] = containerObject;
+        });
+    });
+    var dataCsv = d3.csv("data/SummaryOfPerCountryTraffickingType.csv", 
+        function(error, rows) {
+            rows.forEach(function(d) {
+                var item = new Object();
+                var temp = [];
+                item.label = "MaleSexExploit";
+                item.count = d.Sex_Males;
+                temp[0] = item;
+                item = new Object();
+                item.label = "FemaleSexExploit";
+                item.count = d.Sex_Females;
+                temp[1] = item;
+                item = new Object();
+                item.label = "MaleLaborExploit";
+                item.count = d.Labour_Males;
+                temp[2] = item;
+                item = new Object();
+                item.label = "FemaleLaborExploit";
+                item.count = d.Labor_Females;
+                temp[3] = item;
+                item = new Object();
+                item.label = "MaleOrganExploit";
+                item.count = d.Organ_Males;
+                temp[4] = item;
+                item = new Object();
+                item.label = "FeMaleOrganExploit";
+                item.count = d.Organ_Females;
+                temp[5] = item;                
+                traffickingJson[d.Country] = temp;
+        });
+    });
+    console.log("Loaded Data")
+    console.log(traffickingJson);
+    var chart1 = d3.select("#Data").append("div").attr("id", "barChartDetailed1");
+    var chart2 = d3.select("#Data").append("div").attr("id", "barChartDetailed2");
+    var m_width = $("#map").width()-20,
         width = 538,
-        height = 500,
+        height = 450,
         country,
         state;
 
+    var b_width = $("#barChartDetailed").width(),
+        bar_width = 238,
+        bar_height = 250;
+
     var projection = d3.geo.mercator()
         .scale(100)
-        .translate([width / 2, height / 1.5]);
+        .translate([width / 2, height /1.5]);
 
     var path = d3.geo.path()
         .projection(projection);
 
+    //SVG for Map
     var svg = d3.select("#map").append("svg")
         .attr("preserveAspectRatio", "xMidYMid")
         .attr("viewBox", "0 0 " + width + " " + height)
         .attr("width", m_width)
         .attr("height", m_width * height / width);
-
+   
     svg.append("rect")
         .attr("class", "background")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", m_width)
+        .attr("height", m_width * height / width)
+        .style("stroke", 'black')
+        .style("stroke-width", 2)
         .on("click", country_clicked);
-
     var g = svg.append("g");
     d3.json("data/countries.topo.json", function(error, us) {
-        //console.log(topojson.feature(us, us.objects.countries).features);
       g.append("g")
         .attr("id", "countries")
         .selectAll("path")
@@ -75,10 +162,26 @@
         .enter()
         .append("path")
         .attr("id", function(d) { return d.id; })
+        .attr("fill", function(d) { 
+          if(myDataJson[d.properties.name] != null) {
+              var container = myDataJson[d.properties.name];
+              if(container.sum >= 1000) {
+                  return "#79533d";
+              } else if(container.sum >= 500) {
+                return "#ac7e54";
+              } else {
+                return "#bcab90";  
+              }
+          }
+          return "#fff";})
+        .attr("name", function(d) {
+            if(myDataJson[d.properties.name] != null) {
+              return d.id;
+            }
+            return null;})
         .attr("d", path)
         .on("click", country_clicked);
     });
-
     function zoom(xyz) {
       g.transition()
         .duration(750)
@@ -100,25 +203,125 @@
     }
 
     function country_clicked(d) {
-      g.selectAll(["#states", "#cities"]).remove();
-      state = null;
+        g.selectAll(["#states", "#cities"]).remove();
+        state = null;
 
-      if (country) {
-        g.selectAll("#" + country.id).style('display', null);
-      }
+        if (country) {
+            g.selectAll("#" + country.id).style('display', null);
+        }
 
-      if (d && country !== d) {
-        var xyz = get_xyz(d);
-        country = d;
-        console.log(country);
-        zoom(xyz);
-      } else {
-        var xyz = [width / 2, height / 1.5, 1];
-        country = null;
-        zoom(xyz);
-      }
+        if (d && country !== d) {
+            var xyz = get_xyz(d);
+            country = d;
+            drawChartForCountry(country.properties.name);
+            zoom(xyz);
+        } else {
+            var xyz = [width / 2, height / 1.5, 1];
+            country = null;
+            zoom(xyz);
+        }
     }
-
+        
+    function drawPerCountryDataChart(divId, myDataJson, width, height, countryName){
+        console.log(myDataJson);
+        var opt = {
+          "actions": false,
+          "mode": "vega-lite"
+        }
+        var spec = {    
+            "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+            "autoResize" : "true",
+            "mark": "bar",
+            "width" : width,
+            "height" : height,
+            "encoding": {
+                "size": {"value": 15},
+                "y": {"field": "label", "type": "nominal", "axis": {"title": "Victim Types"}},
+                "x": {"field": "count", "type": "quantitative", "axis": {"title": countryName}},
+                "color": {"field": "label", "type": "nominal", "legend" : false},
+            }
+        };
+        spec['data'] = myDataJson;
+        vega.embed(divId, spec, opt, function(error, result) {
+            var tooltipOption = {
+                showAllFields: false,
+                fields: [
+                {
+                    field: "label",
+                    title: "Type",
+                    formatType : "string"
+                },
+                {
+                    field: "count",
+                    title: "Count",
+                    formatType : "number"
+                }
+                ],
+                delay: 50
+            };
+            vegaTooltip.vegaLite(result.view, spec,tooltipOption);
+        });
+    }
+    function drawPerCountryTrafficChart(divId, myDataJson, width, height, countryName){
+        console.log(myDataJson);
+        var opt = {
+          "actions": false,
+          "mode": "vega-lite"
+        }
+        var spec = {    
+            "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+            "autoResize" : "true",
+            "mark": "bar",
+            "width" : width,
+            "height" : height,
+            "encoding": {
+                "size": {"value": 15},
+                "y": {"field": "label", "type": "nominal", "axis": {"title": "Forms of Trafficking"}},
+                "x": {"field": "count", "type": "quantitative", "axis": {"title": countryName}},
+                "color": {"field": "label", "type": "nominal", "legend" : false},
+            }
+        };
+        spec['data'] = myDataJson;
+        vega.embed(divId, spec, opt, function(error, result) {
+            var tooltipOption = {
+                showAllFields: false,
+                fields: [
+                {
+                    field: "label",
+                    title: "Type",
+                    formatType : "string"
+                },
+                {
+                    field: "count",
+                    title: "Count",
+                    formatType : "number"
+                }
+                ],
+                delay: 50
+            };
+            vegaTooltip.vegaLite(result.view, spec,tooltipOption);
+        });
+    }
+    function drawChartForCountry(countryName){
+        var dataArray = myDataJson[countryName];
+        console.log(countryName);
+        console.log(dataArray);
+        if(dataArray == null) {
+            console.log("data not available");
+            return;
+        }  
+        var tempJson = {};
+        tempJson.values=dataArray.elements;
+        drawPerCountryDataChart("#barChartDetailed1", tempJson, b_width-50, b_width/1.5, countryName);
+        dataArray = traffickingJson[countryName];
+        tempJson = {};
+        if(dataArray != null) {
+            tempJson.values = dataArray;
+            drawPerCountryTrafficChart("#barChartDetailed2", tempJson, b_width-50, b_width/1.5, 
+                                countryName);
+        } else {
+        } 
+    }
     $(window).resize(function() {
       var w = $("#map").width();
       svg.attr("width", w);

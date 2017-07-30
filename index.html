@@ -4,10 +4,11 @@
         <title>CS498 - Final Project</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.css" rel="stylesheet">
         <link rel="stylesheet1" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
-
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
         </script>
@@ -43,7 +44,7 @@
             #section2 {padding-top:50px;padding-left:20px;height:600px;color: #fff; background-color: transparent;}
             #section3 {padding-top:50px;height:600px;color: #fff; background-color: rgb(240, 220, 160);}
             #section4 {padding-top:50px;padding-left:20px;height:600px;color: #fff; background-color: transparent;}
-            #section5 {padding-top:50px;height:1000px;color: #fff; background-color: rgb(240, 220, 160);}
+            #section5 {padding-top:50px;padding-left:20px;height:700px;color: #fff; background-color: transparent;}
         </style>
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -122,13 +123,16 @@
             </div>
         </div>
         <div id="section5" class="container-fluid">
+            <h2 class="featurette-heading">
+                <span class="text-muted">Reasons for trafficking</span>
+            </h2>
             <div class="row align-items-start"> 
-                <div class="col-sm-8" id="map"></div>
-                <div class="col-sm-4 featurette" id="diffusionNote">
+                <div class="col-sm-8" id="map"  box-shadow="0 0 5px #999999"></div>
+                <div class="col-sm-4" id="Data">
+                    <p class="lead text-muted">Based on data reported from 136 countries, trafficking for sexual exploitation and for forced labour are the most prominently detected forms, but trafficking victims can also be exploited in many other ways. Victims are trafficked to be used as beggars, benefit fraud,or for organ removal. An interactive doughnut chart with filters (check/uncheck legends for filtering) and tooltips is used to better visualize this data</p>
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
         <script type="text/javascript">
             $(document).ready(function() { // this runs as soon as the page is ready (DOM is loaded)
             $("#pieChart").load("lib/pieChartWithToolTip.html");
