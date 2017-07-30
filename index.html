@@ -40,11 +40,12 @@
                 align-items: center;
                 text-align: center;
             }
-            #section1 {padding-top:50px;height:600px;color: #fff; background-color: sienna;}
-            #section2 {padding-top:50px;padding-left:20px;height:600px;color: #fff; background-color: transparent;}
-            #section3 {padding-top:50px;height:600px;color: #fff; background-color: transparent;}
-            #section4 {padding-top:50px;padding-left:20px;height:600px;color: #fff; background-color: transparent;}
-            #section5 {padding-top:50px;padding-left:20px;height:700px;color: #fff; background-color: transparent;}
+            #section1 {padding-top:50px;height:600px;color: #fff; background-color: transparent;}
+            #section2 {padding-top:50px;height:600px;color: #fff; background-color: sienna;}
+            #section3 {padding-top:50px;padding-left:20px;height:600px;color: #fff; background-color: transparent;}
+            #section4 {padding-top:50px;height:600px;color: #fff; background-color: transparent;}
+            #section5 {padding-top:50px;padding-left:20px;height:600px;color: #fff; background-color: transparent;}
+            #section6 {padding-top:50px;padding-left:20px;height:700px;color: #fff; background-color: transparent;}
         </style>
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -61,23 +62,48 @@
             <div>
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                  <li><a href="#section1">About</a></li>
-                  <li><a href="#section2">Overview</a></li>
-                  <li><a href="#section3">Diffusion</a></li>
-                  <li><a href="#section4">Reasons</a></li>
-                  <li><a href="#section5">World View</a></li>
+                  <li><a href="#section1">About Visualization</a></li>
+                  <li><a href="#section2">Home</a></li>
+                  <li><a href="#section3">Overview</a></li>
+                  <li><a href="#section4">Diffusion</a></li>
+                  <li><a href="#section5">Reasons</a></li>
+                  <li><a href="#section6">World View</a></li>
                 </ul>
               </div>
             </div>
           </div>
-        </nav>    
+        </nav>
         <div id="section1" class="container-fluid">
+            <h2 class="featurette-heading">
+                <span class="text-muted">About the visualization?</span>
+            </h2>
+            <p class="lead text-muted">This visualization follows Martini Glass hybrid structure. The Overview page provides information about title and reference data.
+            The User is exposed to author driven data in first two scenes followed by an interactive world map to play around. 
+            The overview page also provides a jump off to external resource on human trafficking.
+            </p>
+            <p class="lead text-muted">
+            Visualization is based on Bootstrap, D3, Veg-lite 
+            </p>
+            <p class="lead text-muted">
+            User Interface Events - This visualization incorporates user interface events in World Map and Filtering items in doughnut chart.
+            </p>
+            <p class="lead text-muted">
+            Annotations - Annotations are embedded in doughnut chart tool tips carrying information about various trafficking reasons and contributions
+            </p>
+            <p class="lead text-muted">
+            Triggers - Mouse click events triggering doughnut chat reconfiguration.
+            </p>
+            <p class="lead text-muted">
+            Parameters-Mainly used in world map. Country name from a mouse click event is used a parameter to further filter and or visualize data 
+            </p>
+        </div>
+        <div id="section2" class="container-fluid">
             <div class="jumbotron vertical-center" background="transparent">
                 <h1>Human trafficking</h1>
                 <p>Through the Lens of Data</p>
             </div>
         </div>
-        <div class="featurette" id="section2">
+        <div class="featurette" id="section3">
             <img class="featurette-image img-circle img-responsive pull-right" src="data/cover.jpg">
             <h2 class="featurette-heading">
                 <span class="text-muted">What is Human trafficking?</span>
@@ -90,7 +116,7 @@
             </div>
         </div>
 
-        <div id="section3" class="container-fluid">
+        <div id="section4" class="container-fluid">
                 <h2 class="featurette-heading" >
                         <span class="text-muted">No country is immune</span>
                 </h2>
@@ -107,7 +133,7 @@
                     </div> 
                 </div> 
         </div>
-        <div class="cointainer-fluid" id="section4">
+        <div class="cointainer-fluid" id="section5">
             <div class="row align-items-center"> 
                 <div class="col-sm-6" id="notes">
                     <h2 class="featurette-heading">
@@ -122,7 +148,7 @@
                 </div>
             </div>
         </div>
-        <div id="section5" class="container-fluid">
+        <div id="section6" class="container-fluid">
             <h2 class="featurette-heading">
                 <span class="text-muted">An Interactive World Map</span>
             </h2>
