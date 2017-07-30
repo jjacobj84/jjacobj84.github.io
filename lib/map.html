@@ -168,7 +168,7 @@
               if(container.sum >= 1000) {
                   return "#79533d";
               } else if(container.sum >= 500) {
-                return "#ac7e54";
+                return "#b49d80";
               } else {
                 return "#bcab90";  
               }
@@ -312,15 +312,14 @@
         }  
         var tempJson = {};
         tempJson.values=dataArray.elements;
-        drawPerCountryDataChart("#barChartDetailed1", tempJson, b_width-50, b_width/1.5, countryName);
+        drawPerCountryDataChart("#barChartDetailed1", tempJson, b_width-50, b_width, countryName);
         dataArray = traffickingJson[countryName];
         tempJson = {};
         if(dataArray != null) {
             tempJson.values = dataArray;
-            drawPerCountryTrafficChart("#barChartDetailed2", tempJson, b_width-50, b_width/1.5, 
+            drawPerCountryTrafficChart("#barChartDetailed2", tempJson, b_width-50, b_width, 
                                 countryName);
-        } else {
-        } 
+        }
     }
     $(window).resize(function() {
       var w = $("#map").width();

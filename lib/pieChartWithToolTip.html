@@ -115,7 +115,7 @@
             var percent = Math.round(1000 * d.data.count / total) / 10;
             div.select('.label').style("color", "black").html("Reason : " + d.data.label);
             div.select('.count').html("Victims Count : " + d.data.count);
-            div.select('.percent').html(percent + '%');
+            div.select('.percent').html("contributed to "+percent + '%' + ' among selected reasons');
             console.log("try to put tooktip");
           });
 
